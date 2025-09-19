@@ -6,7 +6,7 @@ output:
     code_folding: hide
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(moderndive)
 library(tidyverse)
@@ -69,7 +69,12 @@ print(data_frame)
 
 # calculation of mean
 pull(data_frame, sample) %>% mean()
+pull(data_frame, positive_or_not) %>% mean()
+mean(character)
+mean(factor)
 ```
+
+mean() works on numeric vector and logical vector (TRUE = 1, FALSE = 0).
 
 ### applying "as.numeric()" to non-numeric variables
 ```{r, eval = FALSE}
