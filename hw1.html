@@ -443,6 +443,8 @@ display: none;
 </div>
 
 
+<div id="problem-1" class="section level2">
+<h2>Problem 1</h2>
 <div id="load-data-set" class="section level3">
 <h3>Load data set</h3>
 <pre class="r"><code>data(early_january_weather)</code></pre>
@@ -481,6 +483,49 @@ humidity was higher during Jan 11 to Jan 14.</p>
 <div id="save-the-plot" class="section level3">
 <h3>Save the plot</h3>
 <pre class="r"><code>ggsave(&quot;hw1.png&quot;, plot = hw1, width = 5, height = 3)</code></pre>
+</div>
+</div>
+<div id="problem-2" class="section level2">
+<h2>Problem 2</h2>
+<div id="construct-data-frame" class="section level3">
+<h3>construct data frame</h3>
+<pre class="r"><code>library(tibble)
+
+data_frame = tibble(
+  sample = rnorm(10),
+  positive_or_not = sample &gt; 0,
+  character = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;),
+  factor = factor(rep(c(&quot;Small&quot;, &quot;Medium&quot;, &quot;Large&quot;), length.out = 10)))
+
+print(data_frame)</code></pre>
+<pre><code>## # A tibble: 10 × 4
+##    sample positive_or_not character factor
+##     &lt;dbl&gt; &lt;lgl&gt;           &lt;chr&gt;     &lt;fct&gt; 
+##  1  1.64  TRUE            a         Small 
+##  2 -2.09  FALSE           b         Medium
+##  3 -0.449 FALSE           c         Large 
+##  4 -1.53  FALSE           d         Small 
+##  5 -2.57  FALSE           e         Medium
+##  6 -0.504 FALSE           f         Large 
+##  7 -1.28  FALSE           g         Small 
+##  8 -1.18  FALSE           h         Medium
+##  9 -0.599 FALSE           i         Large 
+## 10  0.380 TRUE            j         Small</code></pre>
+<pre class="r"><code># calculation of mean
+pull(data_frame, sample) %&gt;% mean()</code></pre>
+<pre><code>## [1] -0.8188261</code></pre>
+</div>
+<div id="applying-as.numeric-to-non-numeric-variables" class="section level3">
+<h3>applying “as.numeric()” to non-numeric variables</h3>
+<pre class="r"><code>data_frame$positive_or_not = as.numeric(data_frame$positive_or_not)
+data_frame$character = as.numeric(data_frame$character)
+data_frame$factor = as.numeric(data_frame$factor)
+
+# see if the operation above is successful
+class(data_frame$positive_or_not)
+class(data_frame$character)
+class(data_frame$factor)</code></pre>
+</div>
 </div>
 
 

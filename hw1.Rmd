@@ -12,6 +12,7 @@ library(moderndive)
 library(tidyverse)
 ```
 
+## Problem 1
 ### Load data set
 ```{r}
 data(early_january_weather)
@@ -50,4 +51,34 @@ From the scatter plot we can see that even though there were some flux from day 
 ### Save the plot
 ```{r}
 ggsave("hw1.png", plot = hw1, width = 5, height = 3)
+```
+
+## Problem 2
+### construct data frame
+
+```{r}
+library(tibble)
+
+data_frame = tibble(
+  sample = rnorm(10),
+  positive_or_not = sample > 0,
+  character = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  factor = factor(rep(c("Small", "Medium", "Large"), length.out = 10)))
+
+print(data_frame)
+
+# calculation of mean
+pull(data_frame, sample) %>% mean()
+```
+
+### applying "as.numeric()" to non-numeric variables
+```{r, eval = FALSE}
+data_frame$positive_or_not = as.numeric(data_frame$positive_or_not)
+data_frame$character = as.numeric(data_frame$character)
+data_frame$factor = as.numeric(data_frame$factor)
+
+# see if the operation above is successful
+class(data_frame$positive_or_not)
+class(data_frame$character)
+class(data_frame$factor)
 ```
