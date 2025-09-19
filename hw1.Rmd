@@ -1,0 +1,53 @@
+---
+title: "p8105_hw1_yl6109"
+author: "Yurou Liu"
+output: 
+  html_document: 
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(moderndive)
+library(tidyverse)
+```
+
+### Load data set
+```{r}
+data(early_january_weather)
+```
+
+### Description
+This data set gives the weather information of different date at EWR from Jan 1st to Jan 15th, 2013. 
+
+the variables in the data set is shown below:<br>
+`r toString(paste(names(early_january_weather), sapply(early_january_weather, class), sep = ":", collapse = "<br>"))`
+
+The data set contains `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
+
+The mean temperature at EWR in 2013 is `r mean(early_january_weather$temp) %>% round(digits = 2)` Fahrenheit.
+
+### Make a scatter plot
+
+```{r}
+hw1 = ggplot(data = early_january_weather, 
+       mapping = aes(
+         x = time_hour, 
+         y = temp,
+         color = humid)) + 
+  geom_point(size = 0.9,
+             alpha = 1) +
+  labs(title = "Scatterplot of Temperature vs Time_hour", 
+       x = "Time_hour", 
+       y = "Temperature (℉)") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+print(hw1)
+```
+
+From the scatter plot we can see that even though there were some flux from day to day, the overall trend of the temperature during the period from Jan 1st to Jan 15th was going up. Overall speaking, the humidity was higher during Jan 11 to Jan 14.
+
+### Save the plot
+```{r}
+ggsave("hw1.png", plot = hw1, width = 5, height = 3)
+```
